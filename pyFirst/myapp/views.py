@@ -8,7 +8,7 @@ def index(request):
     context = {
         'login_name': 'guest'
     }
-    return render(request, 'myapp/index.html', context)
+    return render(request, 'myapp/day_list.html', context)
 
 
 def about(request):
