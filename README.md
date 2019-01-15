@@ -8,3 +8,8 @@ pip install django
 ```
 py -m django startproject pyFirst
 ```
+
+## プロジェクト
+* pyFirst
+    * viewを関数ベースで定義
+* pySecond
