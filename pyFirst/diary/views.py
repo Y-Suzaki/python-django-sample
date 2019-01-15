@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import DayCreateForm
 from .models import Day
 
@@ -25,6 +25,25 @@ def add(request):
     context = {
         'login_name': 'guest',
         'form': DayCreateForm()
+    }
+    return render(request, 'diary/day_form.html', context)
+
+
+def update(request, pk):
+    """ update
+    pkが引数で渡ってくるため、DBからデータを取得する。
+    初回時はそのデータをフォームに表示させる。それ以外は新規登録時と変わらない。
+    """
+    day = get_object_or_404(Day, pk=pk)
+    form = DayCreateForm(request.POST or None, instance=day)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('diary:index')
+
+    context = {
+        'login_name': 'guest',
+        'form': form
     }
     return render(request, 'diary/day_form.html', context)
 
