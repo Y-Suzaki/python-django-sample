@@ -1,0 +1,25 @@
+{% extends 'diary/base.html' %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+    <h1 class="bg-info text-white">日記の登録</h1>
+    <form action="" method="post">
+        <table class="table">
+            <tr>
+                <th>{{ form.title.label }}</th>
+                <td>{{ form.title }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.text.label }}</th>
+                <td>{{ form.text }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.date.label }}</th>
+                <td>{{ form.date }}</td>
+            </tr>
+        </table>
+        <button type="submit" class="btn btn-primary">登録</button>
+        {% csrf_token %}
+    </form>
+{% endblock %}
