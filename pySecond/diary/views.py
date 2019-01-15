@@ -10,6 +10,7 @@ class IndexView(generic.ListView):
     対応するtemplate: day_list.html
     """
     model = Day
+    paginate_by = 3
 
     # template名を指定することも可能
     # template_name = 'diary/day_list.html'
