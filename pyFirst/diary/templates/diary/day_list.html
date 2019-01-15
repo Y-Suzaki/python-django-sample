@@ -3,7 +3,7 @@
 {% block title %}Index{% endblock %}
 
 {% block content %}
-    <h1>日記 {{ login_name }} san.</h1>
+    <h1 class="bg-info text-white">日記 {{ login_name }} san.</h1>
     <table class="table">
         <thead>
             <tr>
@@ -16,7 +16,7 @@
         <tbody>
             {% for day in day_list %}
             <tr>
-                <td>{{ day.title }}</td>
+                <td><a href="{% url 'diary:detail' day.pk %}">{{ day.title }}</a></td>
                 <td>{{ day.date }}</td>
                 <td><a href="{% url 'diary:update' day.pk %}">編集</a></td>
                 <td><a href="{% url 'diary:delete' day.pk %}">削除</a></td>

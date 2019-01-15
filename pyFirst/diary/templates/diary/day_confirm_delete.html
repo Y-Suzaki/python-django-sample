@@ -3,7 +3,7 @@
 {% block title %}Index{% endblock %}
 
 {% block content %}
-    <h1>日記の削除</h1>
+    <h1 class="bg-info text-white">日記の削除</h1>
     <form action="" method="post">
         <table class="table">
             <tr>
@@ -12,7 +12,7 @@
             </tr>
             <tr>
                 <th>本文</th>
-                <td>{{ day.text }}</td>
+                <td>{{ day.text | linebreaksbr }}</td>
             </tr>
             <tr>
                 <th>日付</th>
