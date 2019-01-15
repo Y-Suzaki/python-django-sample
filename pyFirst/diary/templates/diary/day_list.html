@@ -3,8 +3,21 @@
 {% block title %}Index{% endblock %}
 
 {% block content %}
-    <h1>日記です。 {{ login_name }} san.</h1>
-    {% for day in day_list %}
-        <h2>{{ day.title }}</h2>
-    {% endfor %}
+    <h1>日記 {{ login_name }} san.</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>日付</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for day in day_list %}
+            <tr>
+                <td>{{ day.title }}</td>
+                <td>{{ day.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
