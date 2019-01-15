@@ -1,0 +1,12 @@
+{% extends 'diary/base.html' %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+    <h1>日記の入力フォームです。</h1>
+    <form action="" method="post">
+        {{ form.as_p }}
+        <button type="submit">登録</button>
+        {% csrf_token %}
+    </form>
+{% endblock %}
