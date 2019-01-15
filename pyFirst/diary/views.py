@@ -47,3 +47,21 @@ def update(request, pk):
     }
     return render(request, 'diary/day_form.html', context)
 
+
+def delete(request, pk):
+    """ delete
+    pkが引数で渡ってくるため、DBからデータを取得する。
+    Formではないため、validationは不要。
+    最初に削除確認画面を表示→POSTにて削除リクエストとなる。
+    """
+    day = get_object_or_404(Day, pk=pk)
+
+    if request.method == 'POST':
+        day.delete()
+        return redirect('diary:index')
+
+    context = {
+        'day': day
+    }
+    return render(request, 'diary/day_confirm_delete.html', context)
+

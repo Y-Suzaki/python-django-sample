@@ -1,0 +1,26 @@
+{% extends 'diary/base.html' %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+    <h1>日記の削除</h1>
+    <form action="" method="post">
+        <table class="table">
+            <tr>
+                <th>タイトル</th>
+                <td>{{ day.title }}</td>
+            </tr>
+            <tr>
+                <th>本文</th>
+                <td>{{ day.text }}</td>
+            </tr>
+            <tr>
+                <th>日付</th>
+                <td>{{ day.date }}</td>
+            </tr>
+        </table>
+        <p>こちらのデータを削除しても良いですか？</p>
+        <button type="submit" class="btn btn-danger">削除</button>
+        {% csrf_token %}
+    </form>
+{% endblock %}
