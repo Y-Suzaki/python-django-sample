@@ -1,76 +1,53 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views import generic
+from django.urls import reverse_lazy
 from .forms import DayCreateForm
 from .models import Day
 
 
-def index(request):
-    """ index """
-    context = {
-        'login_name': 'guest',
-        'day_list': Day.objects.all()
-    }
-    return render(request, 'diary/day_list.html', context)
-
-
-def add(request):
-    """ add
-    初回時はGET、Form送信時はPOSTで本メソッドが呼ばれる。
+class IndexView(generic.ListView):
+    """ IndexView
+    対応するtemplate: day_list.html
     """
-    form = DayCreateForm(request.POST or None)
+    model = Day
 
-    if request.method == 'POST' and form.is_valid():
-        form.save()
-        return redirect('diary:index')
-
-    context = {
-        'login_name': 'guest',
-        'form': DayCreateForm()
-    }
-    return render(request, 'diary/day_form.html', context)
+    # template名を指定することも可能
+    # template_name = 'diary/day_list.html'
 
 
-def update(request, pk):
-    """ update
-    pkが引数で渡ってくるため、DBからデータを取得する。
-    初回時はそのデータをフォームに表示させる。それ以外は新規登録時と変わらない。
+class AddView(generic.CreateView):
+    """ AddView
+    対応するtemplate: day_form.html
+    templateに渡される変数: form, day
     """
-    day = get_object_or_404(Day, pk=pk)
-    form = DayCreateForm(request.POST or None, instance=day)
-
-    if request.method == 'POST' and form.is_valid():
-        form.save()
-        return redirect('diary:index')
-
-    context = {
-        'login_name': 'guest',
-        'form': form
-    }
-    return render(request, 'diary/day_form.html', context)
+    model = Day
+    form_class = DayCreateForm
+    success_url = reverse_lazy('diary:index')  # リダイレクト先
 
 
-def delete(request, pk):
-    """ delete
-    pkが引数で渡ってくるため、DBからデータを取得する。
-    Formではないため、validationは不要。
-    最初に削除確認画面を表示→POSTにて削除リクエストとなる。
+class UpdateView(generic.UpdateView):
+    """ UpdateView
+    対応するtemplate: day_form.html
+    templateに渡される変数: form, day
     """
-    day = get_object_or_404(Day, pk=pk)
-
-    if request.method == 'POST':
-        day.delete()
-        return redirect('diary:index')
-
-    context = {
-        'day': day
-    }
-    return render(request, 'diary/day_confirm_delete.html', context)
+    model = Day
+    form_class = DayCreateForm
+    success_url = reverse_lazy('diary:index')  # リダイレクト先
 
 
-def detail(request, pk):
-    """ detail """
-    day = get_object_or_404(Day, pk=pk)
+class DeleteView(generic.DeleteView):
+    """ DeleteView
+    対応するtemplate: day_confirm_delete.html
+    templateに渡される変数: day
+    """
+    model = Day
+    success_url = reverse_lazy('diary:index')  # リダイレクト先
 
-    context = {
-        'day': day
-    }
-    return render(request, 'diary/day_detail.html', context)
+
+class DetailView(generic.DetailView):
+    """ DetailView
+    対応するtemplate: day_detail.html
+    templateに渡される変数: day
+    """
+    model = Day
+
