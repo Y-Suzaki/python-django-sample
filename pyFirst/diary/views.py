@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from .forms import DayCreateForm
+from .models import Day
 
 
 def index(request):
     """ index """
     context = {
-        'login_name': 'guest'
+        'login_name': 'guest',
+        'day_list': Day.objects.all()
     }
     return render(request, 'diary/day_list.html', context)
 

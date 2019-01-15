@@ -4,4 +4,7 @@
 
 {% block content %}
     <h1>日記です。 {{ login_name }} san.</h1>
+    {% for day in day_list %}
+        <h2>{{ day.title }}</h2>
+    {% endfor %}
 {% endblock %}
