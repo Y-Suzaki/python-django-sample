@@ -13,3 +13,4 @@ py -m django startproject pyFirst
 * pyFirst
     * viewを関数ベースで定義
 * pySecond
+    * viewを汎用View Classで定義
