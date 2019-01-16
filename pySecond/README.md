@@ -10,3 +10,12 @@ py manage.py startapp diary
 py manage.py makemigrations diary
 py manage.py migrate
 ```
+
+## 管理画面
+* 管理ユーザーの作成
+```
+py manage.py createsuperuser
+
+# Git Bashの場合
+winpty py manage.py createsuperuser
+```
