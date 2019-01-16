@@ -17,6 +17,10 @@
             <a class="nav-link" href="{% url 'diary:index' %}">Index</a>
             <a class="nav-link" href="{% url 'diary:add' %}">Add</a>
             <a class="nav-link" href="{% url 'admin:index' %}">Admin Console</a>
+            {% if user.is_superuser %}
+                <span class="badge badge-danger" style="height: 20px; margin-top: 10px;">Admin Mode</span>
+            {% endif %}
+
         </nav>
         {% block content %}
         {% endblock %}
