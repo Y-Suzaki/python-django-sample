@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
 from .forms import DayCreateForm
@@ -16,7 +17,7 @@ class IndexView(generic.ListView):
     # template_name = 'diary/day_list.html'
 
 
-class AddView(generic.CreateView):
+class AddView(LoginRequiredMixin, generic.CreateView):
     """ AddView
     対応するtemplate: day_form.html
     templateに渡される変数: form, day
@@ -26,7 +27,7 @@ class AddView(generic.CreateView):
     success_url = reverse_lazy('diary:index')  # リダイレクト先
 
 
-class UpdateView(generic.UpdateView):
+class UpdateView(LoginRequiredMixin, generic.UpdateView):
     """ UpdateView
     対応するtemplate: day_form.html
     templateに渡される変数: form, day
@@ -36,7 +37,7 @@ class UpdateView(generic.UpdateView):
     success_url = reverse_lazy('diary:index')  # リダイレクト先
 
 
-class DeleteView(generic.DeleteView):
+class DeleteView(LoginRequiredMixin, generic.DeleteView):
     """ DeleteView
     対応するtemplate: day_confirm_delete.html
     templateに渡される変数: day
